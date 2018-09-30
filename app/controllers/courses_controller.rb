@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 
     def index
         errors = []
-        if params[:filter] && params[:on]
+        if filter?
             if valid_filter?
                 courses = Course.where(params[:filter] => params[:on])
                 errors.push('no courses found') unless courses.length > 0
@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
         end
 
         data = {
-            filtered: valid_filter?,
+            :filtered => (filter? && valid_filter?),
             courses: courses,
             errors: errors
         }.compact
@@ -72,6 +72,10 @@ class CoursesController < ApplicationController
     private
         def course_params
             params.require(:course).permit(:code, :title, :credits, :state, :school, :courseplan, :description)
+        end
+
+        def filter?
+            params[:filter] && params[:on]
         end
 
         def valid_filter?
