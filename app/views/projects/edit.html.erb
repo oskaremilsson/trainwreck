@@ -1,0 +1,10 @@
+<h1>Edit Project</h1>
+
+<%= form_with(model: @project, local: true) do |form| %>
+  
+  <%= render partial: 'projects_form_fields', locals: { form: form }%>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

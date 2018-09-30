@@ -1,0 +1,10 @@
+<h1>New Project</h1>
+
+<%= form_with scope: :project, url: projects_path, local: true do |form| %>
+  
+  <%= render partial: 'projects_form_fields', locals: { form: form }%>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

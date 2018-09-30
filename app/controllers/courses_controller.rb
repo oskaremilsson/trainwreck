@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
         data = {
             :filtered => (filter? && valid_filter?),
             courses: courses,
-            errors: errors
+            :errors => (errors if errors.any?)
         }.compact
         
         render :json => data
@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
 
         data = {
             course: course,
-            errors: errors
+            :errors => (errors if errors.any?)
         }.compact
 
         render :json => data
@@ -72,17 +72,5 @@ class CoursesController < ApplicationController
     private
         def course_params
             params.require(:course).permit(:code, :title, :credits, :state, :school, :courseplan, :description)
-        end
-
-        def filter?
-            params[:filter] && params[:on]
-        end
-
-        def valid_filter?
-            if Course.column_names.include? params[:filter]
-                true
-            else
-                false
-            end
         end
 end

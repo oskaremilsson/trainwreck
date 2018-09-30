@@ -1,0 +1,13 @@
+class CreateProjects < ActiveRecord::Migration[5.2]
+  def change
+    create_table :projects do |t|
+      t.string :title
+      t.string :year
+      t.integer :project_type
+      t.string :images
+      t.string :description
+
+      t.timestamps
+    end
+  end
+end

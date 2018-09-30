@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :courses
 
+  resources :projects
+
   get 'login', to: 'login#index'
   get 'logout', to: 'login#logout', as: :logout
   post 'login', to: 'login#login'
