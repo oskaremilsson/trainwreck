@@ -1,38 +1,10 @@
 <h1>New Course</h1>
 
-
 <%= form_with scope: :course, url: courses_path, local: true do |form| %>
-    <p>
-      <%= form.label :code %><br>
-      <%= form.text_field :code %>
-    </p>
+  
+  <%= render partial: 'courses_form_fields', locals: { form: form }%>
 
-    <p>
-      <%= form.label :school %><br>
-      <%= form.text_field :school %>
-    </p>
-
-    <p>
-      <%= form.label :credits %><br>
-      <%= form.text_field :credits %>
-    </p>
-
-    <p>
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
-    </p>
-
-    <p>
-      <%= form.label :courseplan %><br>
-      <%= form.text_field :courseplan %>
-    </p>
-   
-    <p>
-      <%= form.label :description %><br>
-      <%= form.text_area :description %>
-    </p>
-   
-    <p>
-      <%= form.submit %>
-    </p>
+  <p>
+    <%= form.submit %>
+  </p>
   <% end %>
