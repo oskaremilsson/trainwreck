@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-
     before_action :is_admin?, only: [:new, :create, :edit]
 
     def index
@@ -13,6 +12,11 @@ class ProjectsController < ApplicationController
             end
         elsif
             projects = Project.all
+
+            projects.each do |project|
+                project.images = MultiJson.load(project.images)
+            end
+
             errors.push('no projects found') unless projects.length > 0
         end
 
@@ -28,6 +32,7 @@ class ProjectsController < ApplicationController
     def show
         errors = []
         project = Project.find_by(id: params[:id])
+        project.images = MultiJson.load(project.images)
 
         errors.push('project not found') unless project
 
@@ -44,7 +49,8 @@ class ProjectsController < ApplicationController
 
     def create
         @project = Project.new(project_params)
- 
+        return render 'new' unless valid_images?
+
         @project.save
         redirect_to @project
     end
@@ -62,6 +68,8 @@ class ProjectsController < ApplicationController
 
     def update
         @project = Project.find_by(id: params[:id])
+        return render 'edit' unless valid_images?
+
         if @project.update(project_params)
             redirect_to @project
         else
@@ -70,6 +78,17 @@ class ProjectsController < ApplicationController
     end
 
     private
+        def valid_images?
+            images = params[:project][:images]
+            return true if images.empty?
+            begin
+                MultiJson.load(images) if images.is_a?(String)
+                true
+            rescue MultiJson::ParseError => e
+                false
+            end
+        end
+
         def project_params
             params.require(:project).permit(:title, :year, :project_type, :images, :description)
         end
