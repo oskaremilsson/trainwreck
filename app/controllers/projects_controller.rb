@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
             projects = Project.all
 
             projects.each do |project|
-                project.images = MultiJson.load(project.images)
+                project.images = MultiJson.load(project.images) unless project.images.empty?
             end
 
             errors.push('no projects found') unless projects.length > 0
@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     def show
         errors = []
         project = Project.find_by(id: params[:id])
-        project.images = MultiJson.load(project.images)
+        project.images = MultiJson.load(project.images) unless project.images.empty?
 
         errors.push('project not found') unless project
 
