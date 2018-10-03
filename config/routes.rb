@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :courses
-
   resources :projects
+  resources :socials
 
   get 'login', to: 'login#index'
   get 'logout', to: 'login#logout', as: :logout

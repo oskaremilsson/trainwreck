@@ -1,0 +1,10 @@
+<h1>Edit Social link</h1>
+
+<%= form_with(model: @social, local: true) do |form| %>
+  
+  <%= render partial: 'social_form_fields', locals: { form: form }%>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
