@@ -1,0 +1,10 @@
+<h1>New Job</h1>
+
+<%= form_with scope: :job, url: jobs_path, local: true do |form| %>
+  
+  <%= render partial: 'jobs_form_fields', locals: { form: form }%>
+
+  <p>
+    <%= form.submit %>
+  </p>
+  <% end %>

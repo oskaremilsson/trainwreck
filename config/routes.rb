@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :projects
   resources :socials
+  resources :jobs
 
   get 'login', to: 'login#index'
   get 'logout', to: 'login#logout', as: :logout

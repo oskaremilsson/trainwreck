@@ -1,0 +1,10 @@
+<h1>Edit Job</h1>
+
+<%= form_with(model: @job, local: true) do |form| %>
+  
+  <%= render partial: 'jobs_form_fields', locals: { form: form }%>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
