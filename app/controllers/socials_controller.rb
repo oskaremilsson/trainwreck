@@ -1,7 +1,5 @@
 class SocialsController < ApplicationController
 
-    before_action :is_admin?, only: [:new, :create, :edit]
-
     def index
         errors = []  
         social = Social.all

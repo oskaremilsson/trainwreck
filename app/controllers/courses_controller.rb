@@ -1,7 +1,5 @@
 class CoursesController < ApplicationController
 
-    before_action :is_admin?, only: [:new, :create, :edit]
-
     def index
         errors = []
         if filter?
